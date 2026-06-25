@@ -216,6 +216,22 @@ body{
     radial-gradient(ellipse 60% 40% at 80% 80%,rgba(15,23,41,.8) 0%,transparent 60%),
     linear-gradient(180deg,var(--bg) 0%,var(--navy) 50%,var(--bg) 100%);
 }
+.hero-court{
+  position:absolute;inset:0;z-index:0;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='none' stroke='%23f97316' stroke-width='3'/%3E%3Crect x='50' y='50' width='700' height='400' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Ccircle cx='400' cy='250' r='60' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Cline x1='400' y1='50' x2='400' y2='450' stroke='%23f97316' stroke-width='2'/%3E%3Crect x='50' y='150' width='150' height='200' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Crect x='600' y='150' width='150' height='200' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Ccircle cx='125' cy='250' r='30' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Ccircle cx='675' cy='250' r='30' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Ccircle cx='400' cy='250' r='4' fill='%23f97316'/%3E%3Cpath d='M200 50 Q250 100 200 150' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Cpath d='M600 50 Q550 100 600 150' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Cpath d='M200 350 Q250 400 200 450' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3Cpath d='M600 350 Q550 400 600 450' fill='none' stroke='%23f97316' stroke-width='2'/%3E%3C/svg%3E");
+  background-size:cover;background-position:center;
+  filter:blur(1px);
+}
+.liquid-glass-overlay{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg,
+    rgba(249,115,22,0.03) 0%,
+    rgba(255,255,255,0.02) 25%,
+    rgba(249,115,22,0.05) 50%,
+    rgba(255,255,255,0.01) 75%,
+    rgba(15,23,41,0.3) 100%);
+  backdrop-filter:blur(0px);
+}
 .hero-orb{
   position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;
 }
@@ -600,6 +616,103 @@ tr:hover td{background:rgba(255,255,255,.02);}
   display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99;
 }
 @media(max-width:768px){.sidebar-overlay.show{display:block;}}
+
+/* SUPPORT SECTION */
+.support-section{
+  padding:80px 24px;
+  background:linear-gradient(180deg,var(--bg) 0%,var(--navy) 50%,var(--bg) 100%);
+  position:relative;overflow:hidden;
+}
+.support-ball{
+  position:absolute;right:-60px;top:50%;transform:translateY(-50%);
+  width:300px;height:300px;opacity:0.04;
+  background:radial-gradient(circle,var(--orange) 0%,transparent 70%);
+  border-radius:50%;
+}
+.support-ball2{
+  position:absolute;left:-60px;top:30%;
+  width:200px;height:200px;opacity:0.03;
+  background:radial-gradient(circle,var(--orange) 0%,transparent 70%);
+  border-radius:50%;
+}
+.support-card{
+  background:rgba(14,16,24,0.7);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(249,115,22,0.2);
+  border-radius:20px;padding:40px;
+  max-width:600px;margin:0 auto;
+  position:relative;z-index:1;
+  box-shadow:0 20px 60px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.support-ball-icon{
+  width:70px;height:70px;border-radius:50%;
+  background:linear-gradient(135deg,var(--orange),#f59e0b);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;margin:0 auto 20px;
+  box-shadow:0 8px 24px rgba(249,115,22,0.4);
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+/* MEDIA SECTION */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.media-item{
+  background:var(--glass);border:1px solid var(--glass-border2);
+  border-radius:var(--radius);overflow:hidden;transition:all .3s;
+}
+.media-item:hover{border-color:var(--orange-border);transform:translateY(-2px);}
+.media-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--bg3);}
+.media-video{width:100%;aspect-ratio:16/9;}
+.media-info{padding:12px 14px;}
+.media-title{font-size:14px;font-weight:600;margin-bottom:4px;}
+
+/* PAYMENT */
+.payment-card{
+  background:var(--bg2);border:1px solid var(--glass-border2);
+  border-radius:var(--radius);padding:22px;margin-bottom:16px;
+}
+.payment-amount{font-size:28px;font-weight:900;color:var(--orange);}
+.payment-month{font-size:13px;color:var(--text2);margin-top:4px;}
+.bank-info{
+  background:var(--orange-glow2);border:1px solid var(--orange-border);
+  border-radius:var(--radius2);padding:16px 18px;margin:16px 0;
+}
+.bank-info p{font-size:14px;color:var(--text2);margin-bottom:6px;}
+.bank-info strong{color:var(--text);font-size:15px;}
+
+/* TICKET */
+.ticket-item{
+  background:var(--bg2);border:1px solid var(--glass-border2);
+  border-radius:var(--radius2);padding:16px;margin-bottom:10px;
+}
+.ticket-item.open{border-color:rgba(245,158,11,.3);}
+.ticket-item.answered{border-color:rgba(34,197,94,.3);}
+
+/* COACH PANEL ENHANCED */
+.player-row{
+  background:var(--bg2);border:1px solid var(--glass-border2);
+  border-radius:var(--radius2);padding:14px 16px;
+  display:flex;align-items:center;gap:12px;margin-bottom:8px;
+  transition:border .2s;
+}
+.player-row:hover{border-color:var(--glass-border);}
+.player-row-avatar{
+  width:38px;height:38px;border-radius:10px;
+  background:linear-gradient(135deg,var(--orange),#f59e0b);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:#fff;flex-shrink:0;
+}
+.progress-bar{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden;margin-top:6px;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),#f59e0b);border-radius:3px;transition:width .5s;}
+
+/* ENHANCED NAV GLASS */
+.nav{
+  background:rgba(8,9,13,0.6)!important;
+  backdrop-filter:blur(32px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(32px) saturate(180%)!important;
+  border-bottom:1px solid rgba(249,115,22,0.15)!important;
+  box-shadow:0 4px 24px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05)!important;
+}
 </style>
 </head>
 <body>
@@ -628,6 +741,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
     <button class="nav-link" onclick="scrollTo('#coaches-sec')">مربیان</button>
     <button class="nav-link" onclick="scrollTo('#cats-sec')">رده‌های سنی</button>
     <button class="nav-link" onclick="scrollTo('#ann-sec')">اطلاعیه‌ها</button>
+    <button class="nav-link" onclick="scrollTo('#support-sec')">پشتیبانی</button>
   </div>
   <div class="nav-actions" id="nav-actions">
     <button class="btn btn-ghost" onclick="showPage('login')">ورود</button>
@@ -644,6 +758,8 @@ tr:hover td{background:rgba(255,255,255,.02);}
   <!-- HERO -->
   <div class="hero">
     <div class="hero-bg">
+      <div class="hero-court"></div>
+      <div class="liquid-glass-overlay"></div>
       <div class="hero-orb hero-orb1"></div>
       <div class="hero-orb hero-orb2"></div>
     </div>
@@ -704,6 +820,17 @@ tr:hover td{background:rgba(255,255,255,.02);}
     </div>
   </div>
 
+  <!-- MEDIA -->
+  <div class="section" id="home-media-section" style="padding-top:0;display:none;">
+    <div class="section-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">Gallery & Videos</div>
+        <h2 class="section-title">گالری و ویدیوها</h2>
+      </div>
+      <div class="media-grid" id="home-media-grid"></div>
+    </div>
+  </div>
+
   <!-- COACHES -->
   <div class="section" id="coaches-sec" style="padding-top:0;">
     <div class="section-inner">
@@ -730,6 +857,41 @@ tr:hover td{background:rgba(255,255,255,.02);}
       </div>
       <div class="ann-list" id="home-announcements">
         <div style="text-align:center;color:var(--text2);padding:30px;">در حال بارگذاری...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div class="support-section" id="support-sec">
+    <div class="support-ball"></div>
+    <div class="support-ball2"></div>
+    <div class="section-inner">
+      <div class="section-head">
+        <div class="section-eyebrow">Support</div>
+        <h2 class="section-title">پشتیبانی و تماس</h2>
+        <p class="section-sub">سوال دارید؟ با ما در ارتباط باشید</p>
+      </div>
+      <div class="support-card">
+        <div class="support-ball-icon">🏀</div>
+        <h3 style="text-align:center;font-size:18px;font-weight:700;margin-bottom:6px;">ارسال پیام</h3>
+        <p style="text-align:center;color:var(--text2);font-size:13px;margin-bottom:24px;">سوال، پیشنهاد یا انتقاد خود را با ما در میان بگذارید</p>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">نام و نام خانوادگی *</label><input class="form-input" id="t-name" placeholder="نام شما"></div>
+          <div class="form-group"><label class="form-label">شماره تماس</label><input class="form-input" id="t-phone" placeholder="09xxxxxxxxx"></div>
+        </div>
+        <div class="form-group"><label class="form-label">موضوع *</label>
+          <select class="form-select" id="t-subject">
+            <option value="">انتخاب موضوع...</option>
+            <option value="سوال درباره ثبت‌نام">سوال درباره ثبت‌نام</option>
+            <option value="سوال درباره شهریه">سوال درباره شهریه</option>
+            <option value="سوال درباره تمرینات">سوال درباره تمرینات</option>
+            <option value="پیشنهاد و انتقاد">پیشنهاد و انتقاد</option>
+            <option value="گزارش مشکل">گزارش مشکل</option>
+            <option value="سایر">سایر</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">پیام *</label><textarea class="form-textarea" id="t-body" placeholder="پیام خود را اینجا بنویسید..."></textarea></div>
+        <button class="btn btn-orange btn-full" id="t-btn" onclick="submitTicket()">ارسال پیام 🏀</button>
       </div>
     </div>
   </div>
@@ -922,6 +1084,9 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <div class="sidebar-item" onclick="showDashSection('player','announcements-view')">
           <span class="icon">📢</span> اطلاعیه‌ها
         </div>
+        <div class="sidebar-item" onclick="showDashSection('player','payment')">
+          <span class="icon">💰</span> پرداخت شهریه
+        </div>
         <div class="sidebar-item" onclick="doLogout()">
           <span class="icon">🚪</span> خروج
         </div>
@@ -969,6 +1134,12 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <div id="player-ann-content"></div>
       </div>
 
+      <!-- PAYMENT -->
+      <div class="dash-section" id="player-payment">
+        <div class="dash-header"><div class="dash-title"><h2>پرداخت شهریه</h2></div></div>
+        <div id="player-payment-content"></div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -998,6 +1169,9 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <div class="sidebar-item" onclick="showDashSection('coach','ann-coach')">
           <span class="icon">📢</span> اطلاعیه‌ها
         </div>
+        <div class="sidebar-item" onclick="showDashSection('coach','progress')">
+          <span class="icon">📈</span> گزارش پیشرفت
+        </div>
         <div class="sidebar-item" onclick="doLogout()">
           <span class="icon">🚪</span> خروج
         </div>
@@ -1019,6 +1193,10 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <div class="dash-section" id="coach-ann-coach">
         <div class="dash-header"><div class="dash-title"><h2>اطلاعیه‌ها</h2></div></div>
         <div id="coach-ann-content"></div>
+      </div>
+      <div class="dash-section" id="coach-progress">
+        <div class="dash-header"><div class="dash-title"><h2>گزارش پیشرفت</h2></div></div>
+        <div id="coach-progress-content"></div>
       </div>
     </div>
   </div>
@@ -1055,7 +1233,20 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <div class="sidebar-item" onclick="showDashSection('admin','attendance-admin')">
           <span class="icon">📋</span> حضور و غیاب
         </div>
+        <div class="sidebar-section">مالی و پشتیبانی</div>
+        <div class="sidebar-item" onclick="showDashSection('admin','payments-mgmt')">
+          <span class="icon">💰</span> پرداخت‌ها
+        </div>
+        <div class="sidebar-item" onclick="showDashSection('admin','tickets-mgmt')">
+          <span class="icon">🎧</span> تیکت‌های پشتیبانی
+        </div>
+        <div class="sidebar-item" onclick="showDashSection('admin','media-mgmt')">
+          <span class="icon">🎬</span> رسانه‌ها
+        </div>
         <div class="sidebar-section">تنظیمات</div>
+        <div class="sidebar-item" onclick="showDashSection('admin','prices-mgmt')">
+          <span class="icon">💵</span> شهریه و بانک
+        </div>
         <div class="sidebar-item" onclick="showDashSection('admin','settings-mgmt')">
           <span class="icon">⚙️</span> تنظیمات آکادمی
         </div>
@@ -1147,6 +1338,47 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <div class="dash-section" id="admin-attendance-admin">
         <div class="dash-header"><div class="dash-title"><h2>گزارش حضور و غیاب</h2></div></div>
         <div id="admin-att-content"></div>
+      </div>
+
+      <!-- PAYMENTS MGMT -->
+      <div class="dash-section" id="admin-payments-mgmt">
+        <div class="dash-header"><div class="dash-title"><h2>مدیریت پرداخت‌ها</h2></div></div>
+        <div id="admin-payments-content"></div>
+      </div>
+
+      <!-- TICKETS MGMT -->
+      <div class="dash-section" id="admin-tickets-mgmt">
+        <div class="dash-header"><div class="dash-title"><h2>تیکت‌های پشتیبانی</h2></div></div>
+        <div id="admin-tickets-content"></div>
+      </div>
+
+      <!-- MEDIA MGMT -->
+      <div class="dash-section" id="admin-media-mgmt">
+        <div class="dash-header"><div class="dash-title"><h2>مدیریت رسانه‌ها</h2></div></div>
+        <div id="admin-media-content"></div>
+      </div>
+
+      <!-- PRICES MGMT -->
+      <div class="dash-section" id="admin-prices-mgmt">
+        <div class="dash-header"><div class="dash-title"><h2>شهریه و اطلاعات بانک</h2></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" class="settings-grid-wrap">
+          <div class="card">
+            <h3 style="font-size:15px;font-weight:700;margin-bottom:18px;">💵 شهریه ماهانه (تومان)</h3>
+            <div class="form-group"><label class="form-label">نونهالان (۶–۸)</label><input class="form-input" id="price-noonahalan" type="number" placeholder="0"></div>
+            <div class="form-group"><label class="form-label">مینی (۹–۱۱)</label><input class="form-input" id="price-mini" type="number" placeholder="0"></div>
+            <div class="form-group"><label class="form-label">نوجوانان (۱۲–۱۴)</label><input class="form-input" id="price-nojavan" type="number" placeholder="0"></div>
+            <div class="form-group"><label class="form-label">جوانان (۱۵–۱۷)</label><input class="form-input" id="price-javan" type="number" placeholder="0"></div>
+          </div>
+          <div class="card">
+            <h3 style="font-size:15px;font-weight:700;margin-bottom:18px;">🏦 اطلاعات حساب بانکی</h3>
+            <div class="form-group"><label class="form-label">شماره کارت</label><input class="form-input" id="s-bank-card" placeholder="xxxx-xxxx-xxxx-xxxx" style="direction:ltr;letter-spacing:2px;"></div>
+            <div class="form-group"><label class="form-label">نام بانک</label><input class="form-input" id="s-bank-name" placeholder="بانک ملی"></div>
+            <div class="form-group"><label class="form-label">نام صاحب حساب</label><input class="form-input" id="s-bank-owner" placeholder="نام و نام خانوادگی"></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <button class="btn btn-orange" onclick="savePrices()">ذخیره شهریه و اطلاعات بانک</button>
+        </div>
       </div>
 
       <!-- SETTINGS -->
@@ -1368,6 +1600,7 @@ async function doLogout() {
 // HOME DATA
 // ═══════════════════════════════════════
 async function loadHomeData() {
+  loadHomeMedia();
   const [{ count: pCount }, { data: coaches }, { data: anns }, { data: settings }] = await Promise.all([
     sb.from('players').select('*', {count:'exact',head:true}).eq('status','approved'),
     sb.from('coaches').select('*'),
@@ -1877,11 +2110,13 @@ function showDashSection(dash, section) {
     if (section==='profile') loadPlayerProfileContent();
     if (section==='attendance-view') loadPlayerAttendanceView();
     if (section==='announcements-view') loadPlayerAnnouncements();
+    if (section==='payment') loadPaymentSection();
   }
   if (dash==='coach') {
     if (section==='my-players') loadCoachPlayers();
     if (section==='attendance-mgmt') loadCoachAttendance();
     if (section==='ann-coach') loadCoachAnnouncements();
+    if (section==='progress') loadCoachProgress();
   }
   if (dash==='admin') {
     if (section==='overview') loadAdminOverview();
@@ -1890,6 +2125,10 @@ function showDashSection(dash, section) {
     if (section==='announcements-mgmt') loadAdminAnnouncements();
     if (section==='attendance-admin') loadAdminAttendance();
     if (section==='settings-mgmt') loadAdminSettings();
+    if (section==='payments-mgmt') loadAdminPayments();
+    if (section==='tickets-mgmt') loadAdminTickets();
+    if (section==='media-mgmt') loadAdminMedia();
+    if (section==='prices-mgmt') loadPriceSettings();
   }
 }
 
@@ -1968,11 +2207,16 @@ async function init() {
     loadHomeData();
   }
   // Hide loader
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('hide');
-    setTimeout(() => document.getElementById('loader').style.display='none', 400);
-  }, 800);
+  const loader = document.getElementById('loader');
+  loader.classList.add('hide');
+  setTimeout(() => loader.style.display='none', 400);
 }
+
+// Fallback: force hide loader after 3 seconds
+setTimeout(() => {
+  const l = document.getElementById('loader');
+  if (l) { l.classList.add('hide'); l.style.display='none'; }
+}, 3000);
 
 // Show menu btn only in dash pages
 function updateMenuBtn() {
@@ -1987,3 +2231,369 @@ init();
 </script>
 </body>
 </html>
+<script>
+// ═══════════════════════════════════════
+// PATCH: Fix player login after approval
+// ═══════════════════════════════════════
+const _origAfterLogin = afterLogin;
+// Override loadPlayerDash to re-fetch fresh data
+async function reloadPlayerData() {
+  const { data } = await sb.from('players').select('*').eq('user_id', currentUser.id).single();
+  if (data) currentPlayerData = data;
+}
+
+// ═══════════════════════════════════════
+// SUPPORT / TICKETS
+// ═══════════════════════════════════════
+async function submitTicket() {
+  const name = document.getElementById('t-name')?.value.trim();
+  const phone = document.getElementById('t-phone')?.value.trim();
+  const subject = document.getElementById('t-subject')?.value.trim();
+  const body = document.getElementById('t-body')?.value.trim();
+  const btn = document.getElementById('t-btn');
+  if (!name || !subject || !body) { toast('لطفاً فیلدهای ستاره‌دار را پر کنید', 'warn'); return; }
+  btn.disabled = true; btn.textContent = 'در حال ارسال...';
+  const { error } = await sb.from('tickets').insert([{ name, phone, subject, body }]);
+  btn.disabled = false; btn.textContent = 'ارسال پیام';
+  if (error) { toast('خطا در ارسال', 'err'); return; }
+  toast('پیام شما ارسال شد! به زودی پاسخ می‌دهیم 🏀');
+  ['t-name','t-phone','t-subject','t-body'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+}
+
+// ═══════════════════════════════════════
+// PAYMENTS
+// ═══════════════════════════════════════
+async function loadPaymentSection() {
+  const p = currentPlayerData;
+  if (!p) return;
+  // Load price for category
+  const { data: settings } = await sb.from('settings').select('*');
+  const sMap = {};
+  (settings||[]).forEach(s => sMap[s.key] = s.value);
+  const priceKey = 'price_' + p.category;
+  const price = parseInt(sMap[priceKey] || '0');
+  const bankCard = sMap['bank_card'] || '';
+  const bankName = sMap['bank_name'] || '';
+  const bankOwner = sMap['bank_owner'] || '';
+  // Load payment history
+  const { data: payments } = await sb.from('payments').select('*').eq('player_id', p.id).order('created_at', {ascending: false});
+  const now = new Date();
+  const currentMonth = now.toLocaleDateString('fa-IR', {year:'numeric', month:'long'});
+  const paidThisMonth = (payments||[]).find(pay => pay.month === currentMonth && pay.status === 'confirmed');
+  const el = document.getElementById('player-payment-content');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="payment-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:4px;">شهریه ماه جاری</div>
+          <div class="payment-amount">${price ? price.toLocaleString('fa-IR') + ' تومان' : 'تعیین نشده'}</div>
+          <div class="payment-month">${currentMonth}</div>
+        </div>
+        ${paidThisMonth ? '<span class="badge badge-approved" style="font-size:13px;padding:8px 16px;">✓ پرداخت شده</span>' : '<span class="badge badge-pending" style="font-size:13px;padding:8px 16px;">⏳ پرداخت نشده</span>'}
+      </div>
+      ${!paidThisMonth && price > 0 ? `
+        <div class="bank-info">
+          <p>برای پرداخت به حساب زیر واریز کنید:</p>
+          ${bankCard ? `<div style="margin-bottom:6px;">💳 <strong>${bankCard}</strong></div>` : ''}
+          ${bankName ? `<div style="margin-bottom:6px;">🏦 <strong>${bankName}</strong></div>` : ''}
+          ${bankOwner ? `<div>👤 <strong>${bankOwner}</strong></div>` : ''}
+        </div>
+        <div class="form-group" style="margin-top:14px;">
+          <label class="form-label">لینک یا شناسه تراکنش *</label>
+          <input class="form-input" id="pay-ref" placeholder="شناسه پیگیری پرداخت">
+        </div>
+        <button class="btn btn-orange" onclick="submitPayment('${p.id}', '${currentMonth}', ${price})">ثبت پرداخت</button>
+      ` : ''}
+    </div>
+    <div style="margin-top:20px;">
+      <div style="font-size:15px;font-weight:700;margin-bottom:12px;">تاریخچه پرداخت‌ها</div>
+      ${(payments||[]).length ? (payments||[]).map(pay => `
+        <div class="notif-item ${pay.status === 'confirmed' ? '' : 'unread'}">
+          <div>
+            <div style="font-size:14px;font-weight:600;">${pay.month}</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:2px;">${pay.amount.toLocaleString('fa-IR')} تومان</div>
+          </div>
+          <span class="badge badge-${pay.status}" style="margin-right:auto;">${pay.status==='confirmed'?'✓ تأیید شده':pay.status==='rejected'?'✗ رد شده':'⏳ در انتظار'}</span>
+        </div>`).join('') : '<div class="empty-state"><div class="empty-state-icon">💰</div><p>تاریخچه پرداختی وجود ندارد</p></div>'}
+    </div>`;
+}
+
+async function submitPayment(playerId, month, amount) {
+  const ref = document.getElementById('pay-ref')?.value.trim();
+  if (!ref) { toast('لطفاً شناسه تراکنش را وارد کنید', 'warn'); return; }
+  const { error } = await sb.from('payments').insert([{ player_id: playerId, month, amount, receipt_url: ref, status: 'pending' }]);
+  if (error) { toast('خطا در ثبت پرداخت', 'err'); return; }
+  toast('پرداخت ثبت شد، منتظر تأیید باشید ✓');
+  loadPaymentSection();
+}
+
+// ═══════════════════════════════════════
+// ADMIN: PAYMENTS MANAGEMENT
+// ═══════════════════════════════════════
+async function loadAdminPayments() {
+  const { data } = await sb.from('payments').select('*, players(fname,lname,category)').order('created_at', {ascending:false});
+  const rows = (data||[]).map(pay => `
+    <tr>
+      <td><b>${pay.players?.fname||''} ${pay.players?.lname||''}</b></td>
+      <td><span class="badge badge-${pay.players?.category}">${catFA[pay.players?.category]||''}</span></td>
+      <td>${pay.month}</td>
+      <td>${pay.amount.toLocaleString('fa-IR')} ت</td>
+      <td style="font-size:12px;color:var(--text2);max-width:150px;overflow:hidden;text-overflow:ellipsis;">${pay.receipt_url||'—'}</td>
+      <td><span class="badge badge-${pay.status}">${pay.status==='confirmed'?'تأیید':pay.status==='rejected'?'رد':'در انتظار'}</span></td>
+      <td>
+        <div class="td-actions">
+          ${pay.status!=='confirmed'?`<button class="btn btn-success btn-sm" onclick="updatePayment('${pay.id}','confirmed')">تأیید</button>`:''}
+          ${pay.status!=='rejected'?`<button class="btn btn-danger btn-sm" onclick="updatePayment('${pay.id}','rejected')">رد</button>`:''}
+        </div>
+      </td>
+    </tr>`).join('');
+  const el = document.getElementById('admin-payments-content');
+  if (el) el.innerHTML = data?.length ?
+    `<div class="table-wrap"><table><thead><tr><th>بازیکن</th><th>رده</th><th>ماه</th><th>مبلغ</th><th>شناسه</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody>${rows}</tbody></table></div>` :
+    '<div class="empty-state"><div class="empty-state-icon">💰</div><p>پرداختی ثبت نشده</p></div>';
+}
+
+async function updatePayment(id, status) {
+  await sb.from('payments').update({status}).eq('id', id);
+  toast(status === 'confirmed' ? '✓ پرداخت تأیید شد' : '✗ پرداخت رد شد', status === 'confirmed' ? 'ok' : 'warn');
+  loadAdminPayments();
+}
+
+// ═══════════════════════════════════════
+// ADMIN: PRICE SETTINGS
+// ═══════════════════════════════════════
+async function loadPriceSettings() {
+  const { data } = await sb.from('settings').select('*');
+  const sMap = {};
+  (data||[]).forEach(s => sMap[s.key] = s.value);
+  const fields = ['noonahalan','mini','nojavan','javan'];
+  fields.forEach(f => {
+    const el = document.getElementById('price-' + f);
+    if (el) el.value = sMap['price_' + f] || '0';
+  });
+  const card = document.getElementById('s-bank-card');
+  const name = document.getElementById('s-bank-name');
+  const owner = document.getElementById('s-bank-owner');
+  if (card) card.value = sMap['bank_card'] || '';
+  if (name) name.value = sMap['bank_name'] || '';
+  if (owner) owner.value = sMap['bank_owner'] || '';
+}
+
+async function savePrices() {
+  const fields = ['noonahalan','mini','nojavan','javan'];
+  for (const f of fields) {
+    const val = document.getElementById('price-' + f)?.value || '0';
+    await sb.from('settings').upsert({key: 'price_' + f, value: val});
+  }
+  await sb.from('settings').upsert({key:'bank_card', value: document.getElementById('s-bank-card')?.value||''});
+  await sb.from('settings').upsert({key:'bank_name', value: document.getElementById('s-bank-name')?.value||''});
+  await sb.from('settings').upsert({key:'bank_owner', value: document.getElementById('s-bank-owner')?.value||''});
+  toast('قیمت‌ها و اطلاعات بانک ذخیره شد ✓');
+}
+
+// ═══════════════════════════════════════
+// ADMIN: TICKETS
+// ═══════════════════════════════════════
+async function loadAdminTickets() {
+  const { data } = await sb.from('tickets').select('*').order('created_at', {ascending:false});
+  const el = document.getElementById('admin-tickets-content');
+  if (!el) return;
+  el.innerHTML = (data||[]).length ? (data||[]).map(t => `
+    <div class="ticket-item ${t.status}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;">
+          <div style="font-size:15px;font-weight:700;margin-bottom:4px;">${t.subject}</div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:8px;">${t.body}</div>
+          <div style="font-size:12px;color:var(--text3);">👤 ${t.name} ${t.phone?'· '+t.phone:''} · ${formatDate(t.created_at)}</div>
+          ${t.answer ? `<div style="margin-top:10px;padding:10px 12px;background:var(--orange-glow2);border-radius:8px;font-size:13px;border:1px solid var(--orange-border);">💬 پاسخ: ${t.answer}</div>` : ''}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+          <span class="badge ${t.status==='open'?'badge-pending':t.status==='answered'?'badge-approved':'badge-rejected'}">${t.status==='open'?'باز':t.status==='answered'?'پاسخ داده':'بسته'}</span>
+          ${t.status === 'open' ? `
+            <input class="form-input" id="ans-${t.id}" placeholder="پاسخ..." style="width:200px;padding:6px 10px;font-size:12px;">
+            <button class="btn btn-success btn-sm" onclick="answerTicket('${t.id}')">پاسخ</button>
+          ` : ''}
+          <button class="btn btn-danger btn-sm" onclick="closeTicket('${t.id}')">بستن</button>
+        </div>
+      </div>
+    </div>`).join('') :
+    '<div class="empty-state"><div class="empty-state-icon">🎧</div><p>تیکتی وجود ندارد</p></div>';
+}
+
+async function answerTicket(id) {
+  const answer = document.getElementById('ans-' + id)?.value.trim();
+  if (!answer) { toast('پاسخ را وارد کنید', 'warn'); return; }
+  await sb.from('tickets').update({answer, status:'answered'}).eq('id', id);
+  toast('پاسخ ارسال شد ✓');
+  loadAdminTickets();
+}
+
+async function closeTicket(id) {
+  await sb.from('tickets').update({status:'closed'}).eq('id', id);
+  toast('تیکت بسته شد');
+  loadAdminTickets();
+}
+
+// ═══════════════════════════════════════
+// ADMIN: MEDIA
+// ═══════════════════════════════════════
+async function loadAdminMedia() {
+  const { data } = await sb.from('media').select('*').order('created_at', {ascending:false});
+  const el = document.getElementById('admin-media-content');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="card" style="margin-bottom:20px;">
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;">افزودن رسانه جدید</h3>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">عنوان</label><input class="form-input" id="m-title" placeholder="عنوان ویدیو/تصویر"></div>
+        <div class="form-group">
+          <label class="form-label">نوع</label>
+          <select class="form-select" id="m-type" onchange="toggleMediaInput()">
+            <option value="video">ویدیو</option>
+            <option value="image">تصویر</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">لینک ویدیو (YouTube/Aparat/مستقیم) یا URL تصویر</label>
+        <input class="form-input" id="m-url" placeholder="https://...">
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;">برای ویدیو از لینک Embed استفاده کنید. مثال یوتیوب: https://www.youtube.com/embed/VIDEO_ID</div>
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+        <input type="checkbox" id="m-home" checked style="width:16px;height:16px;accent-color:var(--orange);">
+        <label style="font-size:13px;color:var(--text2);">نمایش در صفحه اصلی</label>
+      </div>
+      <button class="btn btn-orange" onclick="addMedia()">افزودن</button>
+    </div>
+    <div class="media-grid" id="media-list">
+      ${(data||[]).length ? (data||[]).map(m => `
+        <div class="media-item">
+          ${m.type === 'video'
+            ? `<iframe class="media-video" src="${m.url}" frameborder="0" allowfullscreen loading="lazy"></iframe>`
+            : `<img class="media-thumb" src="${m.url}" alt="${m.title||''}" loading="lazy">`}
+          <div class="media-info">
+            <div class="media-title">${m.title||'بدون عنوان'}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
+              <span style="font-size:11px;color:var(--text2);">${m.show_on_home?'📺 نمایش در سایت':''}</span>
+              <button class="btn btn-danger btn-sm" onclick="deleteMedia('${m.id}')">حذف</button>
+            </div>
+          </div>
+        </div>`).join('') : '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">🎬</div><p>رسانه‌ای اضافه نشده</p></div>'}
+    </div>`;
+}
+
+async function addMedia() {
+  const title = document.getElementById('m-title')?.value.trim();
+  const type = document.getElementById('m-type')?.value;
+  const url = document.getElementById('m-url')?.value.trim();
+  const showOnHome = document.getElementById('m-home')?.checked;
+  if (!url) { toast('لینک رسانه الزامی است', 'warn'); return; }
+  await sb.from('media').insert([{title, type, url, show_on_home: showOnHome}]);
+  toast('رسانه اضافه شد ✓');
+  loadAdminMedia();
+  loadHomeMedia();
+}
+
+async function deleteMedia(id) {
+  if (!confirm('حذف این رسانه؟')) return;
+  await sb.from('media').delete().eq('id', id);
+  toast('حذف شد');
+  loadAdminMedia();
+  loadHomeMedia();
+}
+
+// ═══════════════════════════════════════
+// HOME: MEDIA SECTION
+// ═══════════════════════════════════════
+async function loadHomeMedia() {
+  const { data } = await sb.from('media').select('*').eq('show_on_home', true).order('created_at', {ascending:false}).limit(6);
+  const el = document.getElementById('home-media-grid');
+  if (!el || !data?.length) return;
+  document.getElementById('home-media-section').style.display = '';
+  el.innerHTML = data.map(m => `
+    <div class="media-item">
+      ${m.type === 'video'
+        ? `<iframe class="media-video" src="${m.url}" frameborder="0" allowfullscreen loading="lazy"></iframe>`
+        : `<img class="media-thumb" src="${m.url}" alt="${m.title||''}" loading="lazy">`}
+      ${m.title ? `<div class="media-info"><div class="media-title">${m.title}</div></div>` : ''}
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════
+// COACH: ENHANCED PANEL
+// ═══════════════════════════════════════
+async function loadCoachProgress() {
+  const { data: players } = await sb.from('players').select('*').eq('status','approved').order('fname');
+  const el = document.getElementById('coach-progress-content');
+  if (!el) return;
+  if (!players?.length) { el.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📈</div><p>بازیکنی وجود ندارد</p></div>'; return; }
+  el.innerHTML = `
+    <div style="margin-bottom:16px;font-size:13px;color:var(--text2);">برای هر بازیکن گزارش پیشرفت ثبت کنید:</div>
+    ${players.map(p => `
+      <div class="player-row">
+        <div class="player-row-avatar">${getInitials(p.fname,p.lname)}</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:600;">${p.fname} ${p.lname}</div>
+          <span class="badge badge-${p.category}">${catFA[p.category]||''}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;width:220px;">
+          <select class="form-select" id="prog-${p.id}" style="padding:6px;font-size:12px;">
+            <option value="">انتخاب امتیاز...</option>
+            <option value="عالی">⭐⭐⭐ عالی</option>
+            <option value="خوب">⭐⭐ خوب</option>
+            <option value="متوسط">⭐ متوسط</option>
+            <option value="نیاز به تمرین">🔄 نیاز به تمرین</option>
+          </select>
+          <input class="form-input" id="prog-note-${p.id}" placeholder="یادداشت..." style="padding:6px;font-size:12px;">
+        </div>
+      </div>`).join('')}
+    <div style="margin-top:16px;">
+      <button class="btn btn-orange" onclick="saveProgress()">ذخیره گزارش پیشرفت</button>
+    </div>`;
+}
+
+async function saveProgress() {
+  const { data: players } = await sb.from('players').select('id').eq('status','approved');
+  let saved = 0;
+  for (const p of (players||[])) {
+    const score = document.getElementById('prog-' + p.id)?.value;
+    const note = document.getElementById('prog-note-' + p.id)?.value;
+    if (score || note) {
+      // Store in messages as progress report
+      await sb.from('messages').insert([{
+        sender_id: currentUser.id,
+        receiver_id: p.id,
+        body: `📈 گزارش پیشرفت: ${score||''} - ${note||''}`,
+        is_read: false
+      }]);
+      saved++;
+    }
+  }
+  toast(`گزارش ${saved} بازیکن ذخیره شد ✓`);
+}
+
+// ═══════════════════════════════════════
+// FIX: afterLogin patch for fresh player data
+// ═══════════════════════════════════════
+// Re-declare afterLogin to fix pending status bug
+const _oldAfterLogin = afterLogin;
+window.afterLogin = async function(user) {
+  currentUser = user;
+  const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  if (!profile) { toast('خطا در بارگذاری پروفایل', 'err'); return; }
+  currentProfile = profile;
+  if (profile.role === 'admin') {
+    showPage('admin-dash'); loadAdminDash();
+  } else if (profile.role === 'coach') {
+    const { data: coach } = await sb.from('coaches').select('*').eq('user_id', user.id).single();
+    currentCoachData = coach;
+    showPage('coach-dash'); loadCoachDash();
+  } else {
+    // Always fetch fresh player data
+    const { data: player } = await sb.from('players').select('*').eq('user_id', user.id).single();
+    currentPlayerData = player;
+    showPage('player-dash'); loadPlayerDash();
+  }
+};
+</script>
