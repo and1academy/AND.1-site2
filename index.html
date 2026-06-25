@@ -188,10 +188,10 @@ body{
 .badge-pending{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.2);}
 .badge-approved{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.2);}
 .badge-rejected{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.2);}
-.badge-noonahalan{background:rgba(59,130,246,.15);color:#60a5fa;}
+.badge-mikro{background:rgba(59,130,246,.15);color:#60a5fa;}
 .badge-mini{background:rgba(168,85,247,.15);color:#c084fc;}
 .badge-nojavan{background:rgba(34,197,94,.15);color:#4ade80;}
-.badge-javan{background:rgba(249,115,22,.15);color:var(--orange);}
+.badge-nojavan2{background:rgba(249,115,22,.15);color:var(--orange);}
 .badge-admin{background:rgba(249,115,22,.15);color:var(--orange);border:1px solid var(--orange-border);}
 .badge-coach{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.2);}
 
@@ -793,8 +793,8 @@ tr:hover td{background:rgba(255,255,255,.02);}
       </div>
       <div class="cats-grid">
         <div class="cat-card">
-          <div class="cat-en">NOONAHALAN</div>
-          <div class="cat-fa">نونهالان</div>
+          <div class="cat-en">MIKRO</div>
+          <div class="cat-fa">میکرو</div>
           <div class="cat-age">۶ تا ۸ سال</div>
           <div class="cat-bar"><div class="cat-bar-fill" style="width:30%"></div></div>
         </div>
@@ -805,14 +805,14 @@ tr:hover td{background:rgba(255,255,255,.02);}
           <div class="cat-bar"><div class="cat-bar-fill" style="width:50%"></div></div>
         </div>
         <div class="cat-card">
-          <div class="cat-en">NOJAVAN</div>
-          <div class="cat-fa">نوجوانان</div>
+          <div class="cat-en">NOONAHALAN</div>
+          <div class="cat-fa">نونهالان</div>
           <div class="cat-age">۱۲ تا ۱۴ سال</div>
           <div class="cat-bar"><div class="cat-bar-fill" style="width:70%"></div></div>
         </div>
         <div class="cat-card">
-          <div class="cat-en">JAVAN</div>
-          <div class="cat-fa">جوانان</div>
+          <div class="cat-en">NOJAVAN</div>
+          <div class="cat-fa">نوجوانان</div>
           <div class="cat-age">۱۵ تا ۱۷ سال</div>
           <div class="cat-bar"><div class="cat-bar-fill" style="width:90%"></div></div>
         </div>
@@ -1047,10 +1047,10 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <label class="form-label">رده سنی (انتخاب نهایی توسط ادمین)</label>
         <select class="form-select" id="r-cat">
           <option value="">انتخاب کنید...</option>
-          <option value="noonahalan">نونهالان (۶–۸)</option>
+          <option value="mikro">میکرو (۶–۸)</option>
           <option value="mini">مینی (۹–۱۱)</option>
-          <option value="nojavan">نوجوانان (۱۲–۱۴)</option>
-          <option value="javan">جوانان (۱۵–۱۷)</option>
+          <option value="noonahalan">نونهالان (۱۲–۱۴)</option>
+          <option value="nojavan">نوجوانان (۱۵–۱۷)</option>
         </select>
       </div>
       <button class="btn btn-orange btn-full" id="reg-btn" onclick="doRegister()">ثبت‌نام</button>
@@ -1364,10 +1364,10 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" class="settings-grid-wrap">
           <div class="card">
             <h3 style="font-size:15px;font-weight:700;margin-bottom:18px;">💵 شهریه ماهانه (تومان)</h3>
-            <div class="form-group"><label class="form-label">نونهالان (۶–۸)</label><input class="form-input" id="price-noonahalan" type="number" placeholder="0"></div>
+            <div class="form-group"><label class="form-label">میکرو (۶–۸)</label><input class="form-input" id="price-mikro" type="number" placeholder="0"></div>
             <div class="form-group"><label class="form-label">مینی (۹–۱۱)</label><input class="form-input" id="price-mini" type="number" placeholder="0"></div>
-            <div class="form-group"><label class="form-label">نوجوانان (۱۲–۱۴)</label><input class="form-input" id="price-nojavan" type="number" placeholder="0"></div>
-            <div class="form-group"><label class="form-label">جوانان (۱۵–۱۷)</label><input class="form-input" id="price-javan" type="number" placeholder="0"></div>
+            <div class="form-group"><label class="form-label">نونهالان (۱۲–۱۴)</label><input class="form-input" id="price-noonahalan" type="number" placeholder="0"></div>
+            <div class="form-group"><label class="form-label">نوجوانان (۱۵–۱۷)</label><input class="form-input" id="price-nojavan" type="number" placeholder="0"></div>
           </div>
           <div class="card">
             <h3 style="font-size:15px;font-weight:700;margin-bottom:18px;">🏦 اطلاعات حساب بانکی</h3>
@@ -1463,14 +1463,14 @@ function getInitials(fname, lname) {
 function calcCategory(birthDate) {
   if (!birthDate) return '';
   const age = Math.floor((new Date() - new Date(birthDate)) / (365.25*24*3600*1000));
-  if (age >= 6 && age <= 8) return 'noonahalan';
+  if (age >= 6 && age <= 8) return 'mikro';
   if (age >= 9 && age <= 11) return 'mini';
-  if (age >= 12 && age <= 14) return 'nojavan';
-  if (age >= 15 && age <= 17) return 'javan';
+  if (age >= 12 && age <= 14) return 'noonahalan';
+  if (age >= 15 && age <= 17) return 'nojavan';
   return '';
 }
 
-const catFA = {noonahalan:'نونهالان', mini:'مینی', nojavan:'نوجوانان', javan:'جوانان'};
+const catFA = {mikro:'میکرو', mini:'مینی', noonahalan:'نونهالان', nojavan:'نوجوانان'};
 const statusFA = {pending:'در انتظار تأیید', approved:'تأیید شده', rejected:'رد شده'};
 const attFA = {present:'حاضر', absent:'غایب', late:'تأخیر'};
 
@@ -2367,7 +2367,7 @@ async function loadPriceSettings() {
   const { data } = await sb.from('settings').select('*');
   const sMap = {};
   (data||[]).forEach(s => sMap[s.key] = s.value);
-  const fields = ['noonahalan','mini','nojavan','javan'];
+  const fields = ['mikro','mini','noonahalan','nojavan'];
   fields.forEach(f => {
     const el = document.getElementById('price-' + f);
     if (el) el.value = sMap['price_' + f] || '0';
@@ -2381,7 +2381,7 @@ async function loadPriceSettings() {
 }
 
 async function savePrices() {
-  const fields = ['noonahalan','mini','nojavan','javan'];
+  const fields = ['mikro','mini','noonahalan','nojavan'];
   for (const f of fields) {
     const val = document.getElementById('price-' + f)?.value || '0';
     await sb.from('settings').upsert({key: 'price_' + f, value: val});
