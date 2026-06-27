@@ -873,7 +873,6 @@ tr:hover td{background:rgba(255,255,255,.02);}
     <button class="nav-link" onclick="scrollTo('#coaches-sec')">مربیان</button>
     <button class="nav-link" onclick="scrollTo('#cats-sec')">رده‌های سنی</button>
     <button class="nav-link" onclick="scrollTo('#ann-sec')">اطلاعیه‌ها</button>
-    <button class="nav-link" onclick="scrollTo('#support-sec')">پشتیبانی</button>
   </div>
   <div class="nav-actions" id="nav-actions">
     <button class="btn btn-ghost" onclick="showPage('login')">ورود</button>
@@ -969,7 +968,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <div class="section-head">
         <div class="section-eyebrow">Our Coaches</div>
         <h2 class="section-title">مربیان آکادمی</h2>
-        <p class="section-sub">تیم مربیگری حرفه‌ای با سابقه مسابقات ملی و بین‌المللی</p>
+        
       </div>
       <div class="coaches-grid" id="home-coaches">
         <div class="coach-card">
@@ -989,41 +988,6 @@ tr:hover td{background:rgba(255,255,255,.02);}
       </div>
       <div class="ann-list" id="home-announcements">
         <div style="text-align:center;color:var(--text2);padding:30px;">در حال بارگذاری...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUPPORT -->
-  <div class="support-section" id="support-sec">
-    <div class="support-ball"></div>
-    <div class="support-ball2"></div>
-    <div class="section-inner">
-      <div class="section-head">
-        <div class="section-eyebrow">Support</div>
-        <h2 class="section-title">پشتیبانی و تماس</h2>
-        <p class="section-sub">سوال دارید؟ با ما در ارتباط باشید</p>
-      </div>
-      <div class="support-card">
-        <div class="support-ball-icon">🏀</div>
-        <h3 style="text-align:center;font-size:18px;font-weight:700;margin-bottom:6px;">ارسال پیام</h3>
-        <p style="text-align:center;color:var(--text2);font-size:13px;margin-bottom:24px;">سوال، پیشنهاد یا انتقاد خود را با ما در میان بگذارید</p>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">نام و نام خانوادگی *</label><input class="form-input" id="t-name" placeholder="نام شما"></div>
-          <div class="form-group"><label class="form-label">شماره تماس</label><input class="form-input" id="t-phone" placeholder="09xxxxxxxxx"></div>
-        </div>
-        <div class="form-group"><label class="form-label">موضوع *</label>
-          <select class="form-select" id="t-subject">
-            <option value="">انتخاب موضوع...</option>
-            <option value="سوال درباره ثبت‌نام">سوال درباره ثبت‌نام</option>
-            <option value="سوال درباره شهریه">سوال درباره شهریه</option>
-            <option value="سوال درباره تمرینات">سوال درباره تمرینات</option>
-            <option value="پیشنهاد و انتقاد">پیشنهاد و انتقاد</option>
-            <option value="گزارش مشکل">گزارش مشکل</option>
-            <option value="سایر">سایر</option>
-          </select>
-        </div>
-        <div class="form-group"><label class="form-label">پیام *</label><textarea class="form-textarea" id="t-body" placeholder="پیام خود را اینجا بنویسید..."></textarea></div>
-        <button class="btn btn-orange btn-full" id="t-btn" onclick="submitTicket()">ارسال پیام 🏀</button>
       </div>
     </div>
   </div>
@@ -1219,6 +1183,9 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <div class="sidebar-item" onclick="showDashSection('player','payment')">
           <span class="icon">💰</span> پرداخت شهریه
         </div>
+        <div class="sidebar-item" onclick="showDashSection('player','support')">
+          <span class="icon">🎧</span> پشتیبانی
+        </div>
         <div class="sidebar-item" onclick="doLogout()">
           <span class="icon">🚪</span> خروج
         </div>
@@ -1272,6 +1239,12 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <div id="player-payment-content"></div>
       </div>
 
+      <!-- SUPPORT -->
+      <div class="dash-section" id="player-support">
+        <div class="dash-header"><div class="dash-title"><h2>پشتیبانی</h2><p>سوال یا مشکل دارید؟ پیام بفرستید</p></div></div>
+        <div id="player-support-content"></div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1304,6 +1277,9 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <div class="sidebar-item" onclick="showDashSection('coach','progress')">
           <span class="icon">📈</span> گزارش پیشرفت
         </div>
+        <div class="sidebar-item" onclick="showDashSection('coach','support')">
+          <span class="icon">🎧</span> پشتیبانی
+        </div>
         <div class="sidebar-item" onclick="doLogout()">
           <span class="icon">🚪</span> خروج
         </div>
@@ -1329,6 +1305,10 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <div class="dash-section" id="coach-progress">
         <div class="dash-header"><div class="dash-title"><h2>گزارش پیشرفت</h2></div></div>
         <div id="coach-progress-content"></div>
+      </div>
+      <div class="dash-section" id="coach-support">
+        <div class="dash-header"><div class="dash-title"><h2>پشتیبانی</h2><p>سوال یا مشکل دارید؟ پیام بفرستید</p></div></div>
+        <div id="coach-support-content"></div>
       </div>
     </div>
   </div>
@@ -2319,12 +2299,14 @@ function showDashSection(dash, section) {
     if (section==='attendance-view') loadPlayerAttendanceView();
     if (section==='announcements-view') loadPlayerAnnouncements();
     if (section==='payment') loadPaymentSection();
+    if (section==='support') loadSupportSection('player');
   }
   if (dash==='coach') {
     if (section==='my-players') loadCoachPlayers();
     if (section==='attendance-mgmt') loadCoachAttendance();
     if (section==='ann-coach') loadCoachAnnouncements();
     if (section==='progress') loadCoachProgress();
+    if (section==='support') loadSupportSection('coach');
   }
   if (dash==='admin') {
     if (section==='overview') loadAdminOverview();
@@ -2626,19 +2608,73 @@ async function reloadPlayerData() {
 // ═══════════════════════════════════════
 // SUPPORT / TICKETS
 // ═══════════════════════════════════════
-async function submitTicket() {
-  const name = document.getElementById('t-name')?.value.trim();
-  const phone = document.getElementById('t-phone')?.value.trim();
-  const subject = document.getElementById('t-subject')?.value.trim();
-  const body = document.getElementById('t-body')?.value.trim();
-  const btn = document.getElementById('t-btn');
-  if (!name || !subject || !body) { toast('لطفاً فیلدهای ستاره‌دار را پر کنید', 'warn'); return; }
+async function submitTicket(role) {
+  const prefix = role || 'p';
+  const subject = document.getElementById(`t-subject-${prefix}`)?.value.trim();
+  const body = document.getElementById(`t-body-${prefix}`)?.value.trim();
+  const btn = document.getElementById(`t-btn-${prefix}`);
+  if (!subject || !body) { toast('لطفاً موضوع و پیام را پر کنید', 'warn'); return; }
+  const name = currentProfile ? `${currentProfile.fname||''} ${currentProfile.lname||''}`.trim() : 'کاربر';
+  const phone = currentProfile?.phone || '';
   btn.disabled = true; btn.textContent = 'در حال ارسال...';
   const { error } = await sb.from('tickets').insert([{ name, phone, subject, body }]);
   btn.disabled = false; btn.textContent = 'ارسال پیام';
   if (error) { toast('خطا در ارسال', 'err'); return; }
   toast('پیام شما ارسال شد! به زودی پاسخ می‌دهیم 🏀');
-  ['t-name','t-phone','t-subject','t-body'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  document.getElementById(`t-subject-${prefix}`).value = '';
+  document.getElementById(`t-body-${prefix}`).value = '';
+  loadSupportSection(role === 'p' ? 'player' : 'coach');
+}
+
+async function loadSupportSection(role) {
+  const prefix = role === 'player' ? 'p' : 'c';
+  const contentId = role + '-support-content';
+  const name = currentProfile ? `${currentProfile.fname||''} ${currentProfile.lname||''}`.trim() : '';
+  // Load user's previous tickets
+  const { data: tickets } = await sb.from('tickets').select('*')
+    .eq('name', name).order('created_at', {ascending:false}).limit(10);
+  
+  const el = document.getElementById(contentId);
+  if (!el) return;
+  el.innerHTML = `
+    <div class="card" style="margin-bottom:20px;">
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;">🎧 ارسال پیام به پشتیبانی</h3>
+      <div class="form-group">
+        <label class="form-label">موضوع *</label>
+        <select class="form-select" id="t-subject-${prefix}">
+          <option value="">انتخاب موضوع...</option>
+          <option value="سوال درباره شهریه">سوال درباره شهریه</option>
+          <option value="سوال درباره تمرینات">سوال درباره تمرینات</option>
+          <option value="مشکل در ورود به سایت">مشکل در ورود به سایت</option>
+          <option value="پیشنهاد و انتقاد">پیشنهاد و انتقاد</option>
+          <option value="گزارش مشکل">گزارش مشکل</option>
+          <option value="سایر">سایر</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">پیام *</label>
+        <textarea class="form-textarea" id="t-body-${prefix}" placeholder="پیام خود را اینجا بنویسید..."></textarea>
+      </div>
+      <button class="btn btn-orange" id="t-btn-${prefix}" onclick="submitTicket('${prefix}')">ارسال پیام 🏀</button>
+    </div>
+    ${tickets?.length ? `
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">پیام‌های قبلی شما</div>
+    ${tickets.map(t => `
+      <div class="ticket-item ${t.status}">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:700;margin-bottom:4px;">${t.subject}</div>
+            <div style="font-size:13px;color:var(--text2);">${t.body}</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:6px;">${formatDate(t.created_at)}</div>
+            ${t.answer ? `<div style="margin-top:10px;padding:10px 12px;background:var(--orange-glow2);border-radius:8px;font-size:13px;border:1px solid var(--orange-border);">
+              💬 پاسخ پشتیبانی: ${t.answer}
+            </div>` : ''}
+          </div>
+          <span class="badge ${t.status==='open'?'badge-pending':t.status==='answered'?'badge-approved':'badge-rejected'}">
+            ${t.status==='open'?'⏳ در انتظار':t.status==='answered'?'✓ پاسخ داده':'بسته'}
+          </span>
+        </div>
+      </div>`).join('')}` : ''}`;
 }
 
 // ═══════════════════════════════════════
