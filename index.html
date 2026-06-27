@@ -1200,6 +1200,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
           <h2 style="font-size:22px;font-weight:800;">در انتظار تأیید</h2>
           <p style="color:var(--text2);font-size:15px;line-height:1.7;max-width:400px;">ثبت‌نام شما با موفقیت دریافت شد.<br>پس از تأیید توسط مدیر آکادمی، دسترسی کامل به پنل خواهید داشت.</p>
           <span class="badge badge-pending" style="font-size:13px;padding:8px 18px;">🟡 در انتظار تأیید</span>
+          <button class="btn btn-orange" onclick="checkApprovalStatus()" id="refresh-status-btn">🔄 بررسی وضعیت تأیید</button>
           <button class="btn btn-ghost" onclick="doLogout()">خروج</button>
         </div>
       </div>
@@ -1213,6 +1214,22 @@ tr:hover td{background:rgba(255,255,255,.02);}
           </div>
         </div>
         <div id="player-overview-content"></div>
+
+        <!-- BASKETBALL MINI GAME -->
+        <div style="margin-top:24px;">
+          <div style="font-size:15px;font-weight:700;margin-bottom:14px;">🏀 پرتاب آزاد — ۲ شانس داری!</div>
+          <div style="background:var(--bg2);border:1px solid var(--glass-border2);border-radius:var(--radius);overflow:hidden;">
+            <canvas id="basketball-game" width="340" height="300" style="display:block;margin:0 auto;cursor:pointer;max-width:100%;"></canvas>
+            <div style="padding:14px;text-align:center;">
+              <div id="game-msg" style="font-size:14px;color:var(--text2);margin-bottom:10px;">روی توپ کلیک کن و پرتاب کن! 🏀</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:16px;">
+                <div style="font-size:13px;color:var(--text2);">گل: <span id="game-score" style="color:var(--orange);font-weight:700;">0</span></div>
+                <div style="font-size:13px;color:var(--text2);">شانس: <span id="game-shots" style="color:var(--orange);font-weight:700;">2</span></div>
+                <button class="btn btn-ghost btn-sm" id="game-reset-btn" onclick="resetGame()" style="display:none;">🔄 دوباره</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- PROFILE -->
@@ -2592,6 +2609,290 @@ init();
     <span class="mob-icon">⚙️</span>تنظیمات
   </div>
 </div>
+
+<script>
+// ═══════════════════════════════════════
+// BASKETBALL MINI GAME
+// ═══════════════════════════════════════
+let gameState = {
+  shotsLeft: 2,
+  score: 0,
+  ballX: 170, ballY: 240,
+  ballVX: 0, ballVY: 0,
+  isDragging: false,
+  startX: 0, startY: 0,
+  phase: 'idle', // idle, flying, scored, missed, gameover
+  animFrame: null,
+  trail: []
+};
+
+function initGame() {
+  const canvas = document.getElementById('basketball-game');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.onclick = handleGameClick;
+  canvas.onmousedown = startDrag;
+  canvas.onmousemove = onDrag;
+  canvas.onmouseup = endDrag;
+  canvas.ontouchstart = (e) => { e.preventDefault(); startDrag(e.touches[0]); };
+  canvas.ontouchmove = (e) => { e.preventDefault(); onDrag(e.touches[0]); };
+  canvas.ontouchend = (e) => { e.preventDefault(); endDrag(e.changedTouches[0]); };
+  drawGame();
+}
+
+function getCanvasPos(canvas, e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  return {
+    x: (e.clientX - rect.left) * scaleX,
+    y: (e.clientY - rect.top) * scaleY
+  };
+}
+
+function startDrag(e) {
+  if (gameState.phase !== 'idle' || gameState.shotsLeft <= 0) return;
+  const canvas = document.getElementById('basketball-game');
+  const pos = getCanvasPos(canvas, e);
+  const dx = pos.x - gameState.ballX;
+  const dy = pos.y - gameState.ballY;
+  if (Math.sqrt(dx*dx+dy*dy) < 28) {
+    gameState.isDragging = true;
+    gameState.startX = pos.x;
+    gameState.startY = pos.y;
+  }
+}
+
+function onDrag(e) {
+  if (!gameState.isDragging) return;
+  const canvas = document.getElementById('basketball-game');
+  const pos = getCanvasPos(canvas, e);
+  gameState.ballX = pos.x;
+  gameState.ballY = pos.y;
+  gameState.trail = [];
+  drawGame();
+}
+
+function endDrag(e) {
+  if (!gameState.isDragging) return;
+  gameState.isDragging = false;
+  const canvas = document.getElementById('basketball-game');
+  const pos = getCanvasPos(canvas, e);
+  const dx = gameState.startX - pos.x;
+  const dy = gameState.startY - pos.y;
+  const speed = Math.sqrt(dx*dx + dy*dy);
+  if (speed < 10) { gameState.ballX=170; gameState.ballY=240; drawGame(); return; }
+  gameState.ballVX = dx * 0.13;
+  gameState.ballVY = dy * 0.16;
+  gameState.phase = 'flying';
+  gameState.trail = [];
+  gameState.shotsLeft--;
+  document.getElementById('game-shots').textContent = gameState.shotsLeft;
+  animateBall();
+}
+
+function handleGameClick(e) {
+  if (gameState.phase === 'gameover') return;
+}
+
+function animateBall() {
+  const canvas = document.getElementById('basketball-game');
+  if (!canvas) return;
+  if (gameState.animFrame) cancelAnimationFrame(gameState.animFrame);
+
+  function step() {
+    gameState.ballVY += 0.45; // gravity
+    gameState.ballX += gameState.ballVX;
+    gameState.ballY += gameState.ballVY;
+    gameState.trail.push({x: gameState.ballX, y: gameState.ballY});
+    if (gameState.trail.length > 12) gameState.trail.shift();
+
+    // Hoop: center x=170, y=80, radius=28
+    const hoopX = 170, hoopY = 82, hoopR = 28;
+    const dx = gameState.ballX - hoopX;
+    const dy = gameState.ballY - hoopY;
+    const dist = Math.sqrt(dx*dx+dy*dy);
+
+    // Score check - ball passes through hoop
+    if (dist < hoopR - 4 && gameState.ballVY > 0 && gameState.ballY > 60 && gameState.ballY < 110) {
+      gameState.score++;
+      gameState.phase = 'scored';
+      document.getElementById('game-score').textContent = gameState.score;
+      drawGame();
+      setTimeout(() => afterShot('scored'), 700);
+      return;
+    }
+
+    // Out of bounds
+    if (gameState.ballY > 310 || gameState.ballX < -20 || gameState.ballX > 360) {
+      gameState.phase = 'missed';
+      drawGame();
+      setTimeout(() => afterShot('missed'), 500);
+      return;
+    }
+
+    drawGame();
+    gameState.animFrame = requestAnimationFrame(step);
+  }
+  step();
+}
+
+function afterShot(result) {
+  if (gameState.shotsLeft <= 0) {
+    gameState.phase = 'gameover';
+    const msg = gameState.score === 2 ? '🏆 عالی! هر دو گل شد!' : gameState.score === 1 ? '👍 یک گل زدی!' : '😅 دفعه بعد بهتر!';
+    document.getElementById('game-msg').textContent = msg;
+    document.getElementById('game-reset-btn').style.display = '';
+  } else {
+    gameState.ballX = 170; gameState.ballY = 240;
+    gameState.ballVX = 0; gameState.ballVY = 0;
+    gameState.phase = 'idle';
+    gameState.trail = [];
+    document.getElementById('game-msg').textContent = result === 'scored' ? '🎉 گل! یه شانس دیگه داری!' : '😬 نخورد! یه شانس دیگه داری!';
+    drawGame();
+  }
+}
+
+function resetGame() {
+  gameState = { shotsLeft:2, score:0, ballX:170, ballY:240, ballVX:0, ballVY:0, isDragging:false, startX:0, startY:0, phase:'idle', animFrame:null, trail:[] };
+  document.getElementById('game-score').textContent = '0';
+  document.getElementById('game-shots').textContent = '2';
+  document.getElementById('game-msg').textContent = 'روی توپ کلیک کن و پرتاب کن! 🏀';
+  document.getElementById('game-reset-btn').style.display = 'none';
+  drawGame();
+}
+
+function drawGame() {
+  const canvas = document.getElementById('basketball-game');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  // Background
+  ctx.fillStyle = '#0e1018';
+  ctx.fillRect(0, 0, W, H);
+
+  // Court floor line
+  ctx.strokeStyle = 'rgba(249,115,22,0.15)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 270);
+  ctx.lineTo(W, 270);
+  ctx.stroke();
+
+  // Backboard
+  ctx.fillStyle = 'rgba(255,255,255,0.08)';
+  ctx.fillRect(125, 20, 90, 55);
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(125, 20, 90, 55);
+  // inner rect
+  ctx.strokeStyle = 'rgba(249,115,22,0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(148, 30, 44, 32);
+
+  // Pole
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(170, 75);
+  ctx.lineTo(170, H);
+  ctx.stroke();
+
+  // Hoop
+  const hoopX = 170, hoopY = 82;
+  ctx.strokeStyle = '#f97316';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.ellipse(hoopX, hoopY, 28, 8, 0, 0, Math.PI*2);
+  ctx.stroke();
+
+  // Net
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  ctx.lineWidth = 1.5;
+  for (let i = 0; i < 7; i++) {
+    const nx = hoopX - 24 + i*8;
+    ctx.beginPath();
+    ctx.moveTo(nx, hoopY + 8);
+    ctx.lineTo(hoopX - 14 + i*5, hoopY + 36);
+    ctx.stroke();
+  }
+  ctx.beginPath();
+  ctx.moveTo(hoopX-14, hoopY+36);
+  ctx.lineTo(hoopX+14, hoopY+36);
+  ctx.stroke();
+
+  // Trail
+  gameState.trail.forEach((p, i) => {
+    const alpha = (i / gameState.trail.length) * 0.4;
+    ctx.fillStyle = `rgba(249,115,22,${alpha})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 4*(i/gameState.trail.length), 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // Ball
+  const bx = gameState.ballX, by = gameState.ballY, br = 22;
+  const gradient = ctx.createRadialGradient(bx-5, by-5, 2, bx, by, br);
+  gradient.addColorStop(0, '#fb923c');
+  gradient.addColorStop(0.6, '#f97316');
+  gradient.addColorStop(1, '#c2560e');
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(bx, by, br, 0, Math.PI*2);
+  ctx.fill();
+  // Ball lines
+  ctx.strokeStyle = 'rgba(0,0,0,0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.arc(bx, by, br, 0, Math.PI*2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(bx-br, by);
+  ctx.lineTo(bx+br, by);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(bx, by, br, 0, Math.PI, false);
+  ctx.stroke();
+
+  // Score/phase overlay
+  if (gameState.phase === 'scored') {
+    ctx.fillStyle = 'rgba(34,197,94,0.2)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#4ade80';
+    ctx.font = 'bold 36px Vazirmatn, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🎉 گل!', W/2, H/2);
+  } else if (gameState.phase === 'missed') {
+    ctx.fillStyle = 'rgba(239,68,68,0.1)';
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // Drag indicator
+  if (gameState.isDragging) {
+    const dx = gameState.startX - gameState.ballX;
+    const dy = gameState.startY - gameState.ballY;
+    const len = Math.sqrt(dx*dx+dy*dy);
+    if (len > 5) {
+      ctx.strokeStyle = 'rgba(249,115,22,0.5)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5,5]);
+      ctx.beginPath();
+      ctx.moveTo(gameState.ballX, gameState.ballY);
+      ctx.lineTo(gameState.ballX + dx*0.8, gameState.ballY + dy*0.8);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+}
+
+// Init game when player overview loads
+const _origLoadPlayerOverview = loadPlayerOverview;
+window.loadPlayerOverview = function() {
+  _origLoadPlayerOverview();
+  setTimeout(initGame, 100);
+};
+</script>
 </body>
 </html>
 <script>
