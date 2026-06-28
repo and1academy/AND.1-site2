@@ -509,8 +509,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <div id="login-type-sel">
         <div class="ltype-wrap">
           <div class="ltype-btn main" onclick="showLoginForm('player')"><div class="ltype-icon">🏀</div><div class="ltype-text"><strong>ورود بازیکنان و والدین</strong><span>دسترسی به پروفایل و پیشرفت</span></div></div>
-          <div class="ltype-btn" onclick="showLoginForm('coach')"><div class="ltype-icon">👨‍🏫</div><div class="ltype-text"><strong>ورود مربیان</strong><span>مدیریت تیم و حضور و غیاب</span></div></div>
-          <div class="ltype-btn" onclick="showLoginForm('technical')"><div class="ltype-icon">📋</div><div class="ltype-text"><strong>ورود مدیر فنی</strong><span>گزارش‌ها و مدیریت مالی</span></div></div>
+          <div class="ltype-btn" onclick="showLoginForm('coach')"><div class="ltype-icon">👨‍🏫</div><div class="ltype-text"><strong>ورود مربیان و مدیر فنی</strong><span>مدیریت تیم، حضور و غیاب و گزارش‌ها</span></div></div>
         </div>
         <div class="auth-switch">حساب ندارید؟ <span class="auth-link" onclick="showPage('register')">ثبت‌نام بازیکن</span></div>
       </div>
@@ -900,8 +899,7 @@ async function doLogin() {
   const role = prof?.role;
   // Role check
   if (ltype==='player' && role!=='player') { await sb.auth.signOut(); btn.disabled=false; btn.textContent='ورود'; msg.innerHTML='<div class="fmsg err">این حساب بازیکن نیست</div>'; return; }
-  if (ltype==='coach' && role!=='coach') { await sb.auth.signOut(); btn.disabled=false; btn.textContent='ورود'; msg.innerHTML='<div class="fmsg err">این حساب مربی نیست</div>'; return; }
-  if (ltype==='technical' && role!=='technical') { await sb.auth.signOut(); btn.disabled=false; btn.textContent='ورود'; msg.innerHTML='<div class="fmsg err">این حساب مدیر فنی نیست</div>'; return; }
+  if (ltype==='coach' && role!=='coach' && role!=='technical') { await sb.auth.signOut(); btn.disabled=false; btn.textContent='ورود'; msg.innerHTML='<div class="fmsg err">این حساب مربی یا مدیر فنی نیست</div>'; return; }
   btn.disabled=false; btn.textContent='ورود';
   await afterLogin(data.user);
 }
